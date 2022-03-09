@@ -11,63 +11,63 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
  */
 
 class JoblyApi {
-    // Remember, the backend needs to be authorized with a token
-    // We're providing a token you can use to interact with the backend API
-    // DON'T MODIFY THIS TOKEN
-    static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-        "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-        "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  // Remember, the backend needs to be authorized with a token
+  // We're providing a token you can use to interact with the backend API
+  // DON'T MODIFY THIS TOKEN
+  static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
+    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
-    static async request(endpoint, data = {}, method = "get") {
-        console.debug("API Call:", endpoint, data, method);
+  static async request(endpoint, data = {}, method = "get") {
+    console.debug("API Call:", endpoint, data, method);
 
-        const url = `${BASE_URL}/${endpoint}`;
-        const headers = { Authorization: `Bearer ${JoblyApi.token}` };
-        const params = (method === "get")
-            ? data
-            : {};
+    const url = `${BASE_URL}/${endpoint}`;
+    const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+    const params = (method === "get")
+      ? data
+      : {};
 
-        try {
-            return (await axios({ url, method, data, params, headers })).data;
-        } catch (err) {
-            console.error("API Error:", err.response);
-            let message = err.response.data.error.message;
-            throw Array.isArray(message) ? message : [message];
-        }
+    try {
+      return (await axios({ url, method, data, params, headers })).data;
+    } catch (err) {
+      console.error("API Error:", err.response);
+      let message = err.response.data.error.message;
+      throw Array.isArray(message) ? message : [message];
     }
+  }
 
-    // Individual API routes
+  // Individual API routes
 
-    /** Get details on a company by handle. */
+  /** Get details on a company by handle. */
 
-    static async getCompany(handle) {
-        let res = await this.request(`companies/${handle}`);
-        return res.company;
-    }
+  static async getCompany(handle) {
+    let res = await this.request(`companies/${handle}`);
+    return res.company;
+  }
 
-    /** Get the whole list of companies */
-    static async getCompanyList() {
-        let res = await this.request(`companies`);
-        return res.companies;
-    }
+  /** Get the array of companies */
+  static async getCompanyList() {
+    let res = await this.request(`companies`);
+    return res.companies;
+  }
 
-    /** Get the filtered list of companies according the search item*/
-    static async getCompanyFilterList({ name }) {
-        let res = await this.request("companies", { params: { name } });
-        return res.companies;
-    }
+  /** Get the filtered array of companies by name*/
+  static async getCompanyFilterList(name) {
+    let res = await this.request("companies", { params: { name } });
+    return res.companies;
+  }
 
-    /** Get the list of jobs*/
-    static async getJobList() {
-        let res = await this.request("jobs");
-        return res.jobs;
-    }
+  /** Get the array of jobs*/
+  static async getJobList() {
+    let res = await this.request("jobs");
+    return res.jobs;
+  }
 
-    /** Get the flitered list of jobs*/
-    static async getFilterJobList({title}) {
-        let res = await this.request("jobs",{params: {title}});
-        return res.jobs;
-    }
+  /** Get the flitered list of jobs by title*/
+  static async getJobFilterList(title) {
+    let res = await this.request("jobs", { params: { title } });
+    return res.jobs;
+  }
 }
 
 

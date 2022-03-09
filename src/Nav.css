@@ -1,0 +1,23 @@
+.Nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.Nav-left {
+  padding-left: 50px;
+}
+
+.Nav-right {
+  display: flex;
+  padding-right: 50px;
+  gap: 30px;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
