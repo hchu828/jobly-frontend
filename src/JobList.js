@@ -27,7 +27,7 @@ function JobList() {
   return (
     <main>
       <SearchForm />
-      <JobCardList jobList={jobList} />
+      <JobCardList jobList={jobList} isCompanyJob={false} />
 
     </main>
   );
