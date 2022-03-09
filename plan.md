@@ -6,37 +6,53 @@ App
 	  props=none
 	  state=none
 
-	JoblyApp										    Controls which component to render		
-	  state: (home, companies, jobs)
-	  state: list (two states or one state for lists)
-	      pass down setState handler
+	Routes:
+		<Switch>
+			<Route exact path="/">
+				<Home/ >
+			</Route>
+			<Route exact path="/companies">
+				<CompaniesLise/ >
+			</Route>
+			<Route exact path="/jobs">
+				<JobsList/ >
+			</Route>
+			<Route exact path="/companies/:companyHandle">
+				<Company/ >
+			</Route>
+			<Redirect to="/">
+		</Switch>
 
-		HomeList(presentational)
-		  prop: none
-
-		CompaniesList								  Show a list of filtered companies (default is all)
-		  prop: 	list of all companies 
-		  state: 	filtered list  of companies (params) { list.map -> Company w/ link}
-
-			Company								      Show company details with list of CompanyJobs
-			  prop: companyHandle
-			  state: {Company} { Company.jobs.map -> Job}
 	
-				CompanyJob							  Presentational
-					prop: {Company.jobs}
 
-		JobsList									    Show a list of filtered jobs (default is all)
+		HomePage								         Presentational
+		  prop: none
+		  state: none
+
+		CompanyList								  Show a list of filtered companies (default is all)
+		  prop: 	none 
+		  state: 	(AJAX request) => filtered list  of companies (default: the whole list of companies) { list.map -> Company route} 
+		  			searchParams
+		  			
+					
+
+		CompanyDetail								      Show company details with list of CompanyJobs
+			prop: companyHandle
+			state: {Company} { Company.jobs.map -> Job} (AJAX request)
+
+			CompanyJob							  Presentational
+				prop: {Company.jobs}
+
+		JobList									    Show a list of filtered jobs (default is all)
 			prop: list of all jobs
-		  state: filtered  list of jobs { list.map -> Job}
+		    state: (AJAX request) => filtered  list of jobs { list.map -> Job}
 
 			Job									        Presentational
 			  prop: {Job} 
 
+			  JobCardList
+			  SearchForm
+			  JobCard
+			  JoblyAPI
 
-useEffect(function getList() {
-{ AJAX for company or job}   
-
-if(state === home)} {do nothing} 
-else (AJAX for company or job function}
-
-, [state])
+	
