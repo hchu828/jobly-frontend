@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// two ways to use bootstrap in React
+// install bootstrap, and import here from node_modules
+// Or insert link in index.html
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

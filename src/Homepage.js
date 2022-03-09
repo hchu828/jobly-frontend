@@ -1,3 +1,10 @@
+/** Presentational of showing home page
+ * 
+ * props: none
+ * state: none
+ * 
+ * Routes -> HomePage
+ */
 
 function HomePage() {
   return (
@@ -5,7 +12,7 @@ function HomePage() {
       <h1>Jobly</h1>
       <p>All the jobs in one, convenient place.</p>
     </main>
-  )
+  );
 }
 
 export default HomePage;

@@ -1,9 +1,19 @@
+/** Presentational for showing a job
+ * 
+ * props:
+ *  - job: an object, like {title, salary, equity, companyHandle, companyName}
+ *  - isCompanyJob: true/ false
+ * 
+ * state: none
+ * 
+ * JobCardList -> JobCard
+ */
 
 function JobCard({ job, isCompanyJob }) {
   return (
     <div>
       <h4>{job.title}</h4>
-      {isCompanyJob &&
+      {!isCompanyJob &&
         <p>{job.companyName}</p>
       }
       {job.salary &&
@@ -13,5 +23,5 @@ function JobCard({ job, isCompanyJob }) {
     </div>
   )
 }
-
+//line 19, if salary is 0
 export default JobCard;

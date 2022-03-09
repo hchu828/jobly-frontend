@@ -53,7 +53,7 @@ class JoblyApi {
 
   /** Get the filtered array of companies by name*/
   static async getCompanyFilterList(name) {
-    let res = await this.request("companies", { params: { name } });
+    let res = await this.request("companies", { name });
     return res.companies;
   }
 
@@ -65,10 +65,11 @@ class JoblyApi {
 
   /** Get the flitered list of jobs by title*/
   static async getJobFilterList(title) {
-    let res = await this.request("jobs", { params: { title } });
+    let res = await this.request("jobs", { title } );
     return res.jobs;
   }
 }
+//change let to const, tell data details of response
 
 
 export default JoblyApi;

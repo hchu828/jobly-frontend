@@ -24,9 +24,15 @@ function JobList() {
   if (isLoading) {
     return <i>Loading...</i>;
   }
+
+  function updateFilterBy(filterData) {
+    setFilterBy(filterData);
+  }
+
+
   return (
     <main>
-      <SearchForm />
+      <SearchForm updateFilterBy={updateFilterBy} />
       <JobCardList jobList={jobList} isCompanyJob={false} />
 
     </main>

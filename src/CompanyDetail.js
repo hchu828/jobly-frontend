@@ -3,17 +3,32 @@ import { useParams } from "react-router-dom";
 import JoblyApi from "./JoblyApi";
 import JobCardList from "./JobCardList";
 
+
+/** Presentational of company details(company name, description and jobs)
+ * 
+ * props: none
+ * 
+ * state:
+ *  - company: an object, like
+ *        {handle, name, description, numEmployees, logoUrl, jobs}
+ * 
+ * Routes -> CompanyDetail -> JobCardList
+ */
+
 function CompanyDetail() {
   const [company, setCompany] = useState(null);
-  const params = useParams();
+  const { handle } = useParams();
 
+  // get back a single company, and update company state
   useEffect(function fetchCompanyDetail() {
     async function fetchCompany() {
-      const companyData = await JoblyApi.getCompany(params.handle);
+      const companyData = await JoblyApi.getCompany(handle);
       setCompany(companyData);
     }
     fetchCompany();
-  }, []);
+  }, [handle]);
+// if params changes, but useEffect just run once after first render
+
 
   if (!company) {
     return <i>Loading...</i>;
@@ -28,7 +43,6 @@ function CompanyDetail() {
         isCompanyJob={true}
       />
     </div>
-
   );
 }
 

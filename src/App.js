@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-
 import { BrowserRouter } from "react-router-dom";
 import Nav from "./Nav"
 import Routes from "./Routes"
@@ -13,6 +11,7 @@ import Routes from "./Routes"
  * 
  * App -> {Nav, Routes}
  */
+
 function App() {
   return (
     <div className="App">

@@ -9,6 +9,7 @@ import "./Nav.css";
  * 
  * App -> Nav 
  */
+
 function Nav() {
 
   return (
@@ -17,12 +18,11 @@ function Nav() {
         <NavLink exact to="/">Jobly</NavLink>
       </div>
       <div className="Nav-right">
-        <NavLink exact to="/companies">Companies</NavLink>
-        <NavLink exact to="/jobs">Jobs</NavLink>
+        <NavLink to="/companies">Companies</NavLink>
+        <NavLink to="/jobs">Jobs</NavLink>
       </div>
     </nav>
   );
-
 }
 
 export default Nav;
