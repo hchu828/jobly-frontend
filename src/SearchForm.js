@@ -1,5 +1,7 @@
 
-function SearchForm() {
+
+function SearchForm({}) {
+  
   return (
     <main>
 
