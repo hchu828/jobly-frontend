@@ -14,6 +14,9 @@ class JoblyApi {
   // Remember, the backend needs to be authorized with a token
   // We're providing a token you can use to interact with the backend API
   // DON'T MODIFY THIS TOKEN
+
+  static UserToken = "";
+
   static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
     "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
@@ -105,6 +108,7 @@ class JoblyApi {
    */
   static async getUser(username, password) {
     const res = await this.request("users", { username, password });
+    JoblyApi.UserToken = res.token;
     return res.user;
   }
 
@@ -124,6 +128,7 @@ class JoblyApi {
   static async registerUser(username, password, firstName, lastName, email) {
     const data = { username, password, firstName, lastName, email };
     const res = await this.request("users", data, "post");
+    JoblyApi.UserToken = res.token;
     return res.user;
   }
 
@@ -144,9 +149,6 @@ class JoblyApi {
     const res = await this.request(`users/${username}`, data, "patch");
     return res.user;
   }
-
 }
-
-
 
 export default JoblyApi;

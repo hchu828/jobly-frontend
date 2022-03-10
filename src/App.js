@@ -2,14 +2,16 @@ import './App.css';
 import { useState } from 'react';
 import { BrowserRouter } from "react-router-dom";
 import JoblyApi from "./JoblyApi";
-import Nav from "./Nav"
-import Routes from "./Routes"
+import Nav from "./Nav";
+import Routes from "./Routes";
+import UserContext from "./userContext";
 
 /** App for rendering Jobly
  * 
  * Props: none
  * 
- * State: none
+ * State: 
+ *  - user: an object, like{username, firstName, lastName, email, isAdmin}
  * 
  * App -> {Nav, Routes}
  */
@@ -17,12 +19,12 @@ import Routes from "./Routes"
 function App() {
   const [user, setUser] = useState(null);
 
-  async function login(username, password) {
+  async function login({username, password}) {
     const userData = await JoblyApi.getUser(username, password);
     setUser(userData);
   }
 
-  async function signup(username, password, firstName, lastName, email) {
+  async function signup({username, password, firstName, lastName, email}) {
     const userData = await JoblyApi.registerUser(
       username,
       password,
@@ -33,7 +35,7 @@ function App() {
     setUser(userData);
   }
 
-  async function editUser(username, firstName, lastName, email) {
+  async function editUser({username, firstName, lastName, email}) {
     const userData = await JoblyApi.editUser(
       username,
       firstName,
@@ -50,13 +52,18 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Nav logout={logout} />
-        <Routes
-          login={login}
-          signup={signup}
-          edit={editUser}
-        />
+        <UserContext.Provider value={user}>
+          <Nav logout={logout} />
+          <Routes
+            login={login}
+            signup={signup}
+            edit={editUser}
+          />
+        </UserContext.Provider>
+
+
       </BrowserRouter>
+
     </div>
   );
 }
