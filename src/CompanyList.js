@@ -18,13 +18,13 @@ import "./JoblyApp.css"
 
 function CompanyList() {
   const [companyList, setCompanyList] = useState(null);
-  const [filterBy, setFilterBy] = useState(null);
+  const [filterBy, setFilterBy] = useState("");
 
 
   // get back a list of companies and update companyList state
   useEffect(function fetchCompanyList() {
     async function fetchList() {
-      const companies = (filterBy === null)
+      const companies = (filterBy === "")
         ? await JoblyApi.getCompanyList()
         : await JoblyApi.getCompanyFilterList(filterBy);
       setCompanyList(companies);
@@ -39,6 +39,7 @@ function CompanyList() {
 
   //update the filterBy with the search input
   function updateFilterBy(filterData) {
+    console.log(filterData);
     setFilterBy(filterData);
   }
 
