@@ -3,8 +3,13 @@ React Jobly Component Hierarchy
 App
 	props: none
 	state: user
+	TODO: logout fn, handle it down to Logout component
+	      login fn, handle it down to Login component
+		  singup fn, handle it down to signup component
+		  profile fn,
 
-	Nav											        Displays 3 NavLinks to home, companies, jobs, profile, logout(if user login)
+	Nav											        Displays 3 NavLinks 
+	home, companies, jobs, profile, logout(if user login)
 	home, login, signup(if user not login)
 	  props=none
 	  state=none
@@ -14,28 +19,18 @@ App
 
 	Routes:
 		<Switch>
-			<Route exact path="/">
-				<Homepage/ >
+			
 			</Route><Route exact path="/">
 				<Homepage/ >
 			</Route>
 			<Route exact path="/login">
-				<Login/ >
+				<LoginForm / >
 			</Route>
 			<Route exact path="/signup">
-				<Signup/ >
+				<SignupForm />
 			</Route>
 			<Route exact path="/profile">
-				<Profile/ >
-			</Route>
-			<Route exact path="/login">
-				<Login/ >
-			</Route>
-			<Route exact path="/signup">
-				<Signup/ >
-			</Route>
-			<Route exact path="/profile">
-				<Profile/ >
+				<ProfileForm / >
 			</Route>
 			<Route exact path="/companies">
 				<CompaniesList/ >
@@ -53,12 +48,7 @@ App
 
 		HomePage								         Presentational
 		  prop: none
-		  state: user
-		  <UserContext.Provider >
-		  	<LoginForm />
-			<UserDetailForm />
-		  </UserContext.Provider >
-		  
+		  state: none
 
 		  Login, signup buttons(if not login)
 		  add one line of context(if login)
@@ -90,42 +80,17 @@ App
 			  JoblyAPI
 
 		LoginForm:                        Show a form and update the login data
-			props: fn from Login component to update the login info.
+			props: fn from App component to update the login info.
 			state: formData
 
-		UserDetailForm:                   Show a form and update form data
-		    props: fn from Signup component and Profile component
+		SignupForm:                   Show a form and update form data
+		    props: fn from App component
 			state: formData
-				if(user === null) signup form data
-				else profile form
-		
+				
 
-		
-		Login                             update userContext
-			props:none
-			state: user
-			<UserContext.Provider value={user}>
-				<LoginForm />
-			<UserContext.Provider />
-
-		Signup							  update userContext
-			props: none
-			state: user
-			<UserContext.Provider value={user}>
-				<UserDetailForm />
-			<UserContext.Provider />
-
-		Profile							  update userContext
-			props: none
-			state: user
-
-			<UserContext.Provider value={user}>
-				<UserDetailForm />
-			<UserContext.Provider />
-
-		Logout		                      exit and show homepage				
-			props: none
-			state: user(change userContext from user info to null)
+		ProfileForm:
+			 props: fn from App component
+			state: formData
 
 
 		userContext                       create context
@@ -133,7 +98,7 @@ App
 			state: none
 			       
 
-
+        update JoblyApi to for login and signup, store Token
 
 
 
