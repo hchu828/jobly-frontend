@@ -123,7 +123,7 @@ App
 				<UserDetailForm />
 			<UserContext.Provider />
 
-		Logout									
+		Logout		                      exit and show homepage				
 			props: none
 			state: user(change userContext from user info to null)
 
@@ -132,6 +132,10 @@ App
 			props: none
 			state: none
 			       
+
+
+
+
 
 		
 
