@@ -1,3 +1,6 @@
+import "./Homepage.css";
+import "./JoblyApp.css"
+
 /** Presentational of showing home page
  * 
  * props: none
@@ -8,10 +11,12 @@
 
 function HomePage() {
   return (
-    <main>
-      <h1>Jobly</h1>
-      <p>All the jobs in one, convenient place.</p>
-    </main>
+    <div className="JoblyApp">
+      <div className="Homepage ">
+        <h1 className="display-1 fw-bold">Jobly</h1>
+        <p className="h3">All the jobs in one, convenient place.</p>
+      </div>
+    </div>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./SearchForm.css";
 
 /** Showing the search form, and storing user input
  * 
@@ -16,7 +17,7 @@ function SearchForm({ updateFilterBy }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    updateFilterBy(formData);   
+    updateFilterBy(formData);
   }
 
   function handleChange(evt) {
@@ -27,16 +28,34 @@ function SearchForm({ updateFilterBy }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      
-      <input 
+
+      <div className="input-group">
+        <div className="col-md-6">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Enter search term.."
+            aria-label="search term"
+            aria-describedby="basic-addon2"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="input-group-append">
+          <button class="btn btn-primary btn-outline-secondary text-white" type="submit">Submit</button>
+        </div>
+      </div >
+
+      {/* <input
+        className="input"
         name="searchForm"
         placeholder="Enter search term..."
         value={formData}
         onChange={handleChange}
-      />
-     
-      <button>Submit</button>
-    </form>
+        aria-describedby="basic-addon2"
+      /> */}
+
+      {/* <button className="btn btn-primary">Submit</button> */}
+    </form >
   );
 }
 

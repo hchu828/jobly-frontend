@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 // two ways to use bootstrap in React
 // install bootstrap, and import here from node_modules
 // Or insert link in index.html

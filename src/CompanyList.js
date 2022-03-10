@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
 import JoblyApi from "./JoblyApi";
 import CompanyCard from "./CompanyCard";
+import "./JoblyApp.css"
 
 /** Show the search form and a list of companies
  * 
@@ -35,14 +36,14 @@ function CompanyList() {
   if (!companyList) {
     return <i>Loading...</i>;
   }
-  
+
   //update the filterBy with the search input
   function updateFilterBy(filterData) {
     setFilterBy(filterData);
   }
 
   return (
-    <section>
+    <section className="JoblyApp">
       <SearchForm updateFilterBy={updateFilterBy} />
       {companyList.map(company =>
         <CompanyCard

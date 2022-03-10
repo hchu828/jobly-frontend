@@ -1,3 +1,4 @@
+import "./Card.css"
 /** Presentational for showing a job
  * 
  * props:
@@ -11,7 +12,7 @@
 
 function JobCard({ job, isCompanyJob }) {
   return (
-    <div>
+    <div className="Card">
       <h4>{job.title}</h4>
       {!isCompanyJob &&
         <p>{job.companyName}</p>

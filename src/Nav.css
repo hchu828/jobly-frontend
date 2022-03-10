@@ -1,7 +1,7 @@
 .Nav {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin: 1em 0em;
 }
 
 .Nav-left {
@@ -20,4 +20,9 @@ a:link {
 
 a:visited {
   text-decoration: none;
+}
+
+.active{
+  color: black;
+  font-weight: bold;
 }
