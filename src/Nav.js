@@ -10,7 +10,7 @@ import "./Nav.css";
  * App -> Nav 
  */
 
-function Nav() {
+function Nav({ logout }) {
 
   return (
     <nav className="Nav">

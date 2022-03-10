@@ -38,38 +38,115 @@ class JoblyApi {
 
   // Individual API routes
 
-  /** Get details on a company by handle. */
+  /** Get details on a company by handle. 
+   * 
+   * accepts: companyHandle (string)
+   * 
+   * returns Company object like 
+   * {handle, name, description, numEmployees, logoUrl, jobs}
+  */
 
   static async getCompany(handle) {
-    let res = await this.request(`companies/${handle}`);
+    const res = await this.request(`companies/${handle}`);
     return res.company;
   }
 
-  /** Get the array of companies */
+  /** Get an array of companies
+  * 
+  * returns array of Company objects, like [Company, ...]
+  * where Company is {handle, name, description, numEmployees, logoUrl}
+ */
   static async getCompanyList() {
-    let res = await this.request(`companies`);
+    const res = await this.request(`companies`);
     return res.companies;
   }
 
-  /** Get the filtered array of companies by name*/
+  /** Get the filtered array of companies by name
+   * 
+   * accepts: name (string), where name is ILIKE of company name in db
+   * 
+   * returns array of Company objects, like [Company, ...]
+   * where Company is {handle, name, description, numEmployees, logoUrl}
+   */
   static async getCompanyFilterList(name) {
-    let res = await this.request("companies", { name });
+    const res = await this.request("companies", { name });
     return res.companies;
   }
 
-  /** Get the array of jobs*/
+  /** Get an array of jobs
+  * 
+  * returns array of Job objects, like [Job, ...]
+  * where Job is {id, title, salary, equity, companyHandle, companyName}
+ */
   static async getJobList() {
-    let res = await this.request("jobs");
+    const res = await this.request("jobs");
     return res.jobs;
   }
 
-  /** Get the flitered list of jobs by title*/
+  /** Get the filtered array of jobs by title
+   * 
+   * accepts: title(string), where title is ILIKE of Job title in db
+   * 
+   * returns array of Job objects, like [Job, ...]
+   * where Job is {id, title, salary, equity, companyHandle, companyName}
+   */
   static async getJobFilterList(title) {
-    let res = await this.request("jobs", { title } );
+    const res = await this.request("jobs", { title });
     return res.jobs;
   }
+
+  /** Get user by (username, password) if authenticated
+   * 
+   *  accepts: username(string), password(string)
+   * 
+   * returns User object 
+   * where User is { username, firstname, lastname, email, isAdmin, jobs}
+   * where jobs is [{id, title, companyHandle, companyName, state}]
+   */
+  static async getUser(username, password) {
+    const res = await this.request("users", { username, password });
+    return res.user;
+  }
+
+  /** Register new user
+   * 
+   * accepts: 
+   *  username (string),
+   *  password (string),
+   *  firstName (string),
+   *  lastName (string),
+   *  email (string)
+   * 
+   * returns User object 
+   * where User is { username, firstname, lastname, email, isAdmin, jobs}
+   * where jobs is [{id, title, companyHandle, companyName, state}]
+   */
+  static async registerUser(username, password, firstName, lastName, email) {
+    const data = { username, password, firstName, lastName, email };
+    const res = await this.request("users", data, "post");
+    return res.user;
+  }
+
+  /** Edit user details 
+   * 
+   * accepts: 
+   *  username (string),
+   *  firstName (string),
+   *  lastName (string),
+   *  email (string)
+   * 
+   * returns User object 
+   * where User is { username, firstname, lastname, email, isAdmin, jobs}
+   * where jobs is [{id, title, companyHandle, companyName, state}]
+   */
+  static async editUser(username, firstName, lastName, email) {
+    const data = { firstName, lastName, email };
+    const res = await this.request(`users/${username}`, data, "patch");
+    return res.user;
+  }
+
 }
-//change let to const, tell data details of response
+
 
 
 export default JoblyApi;
