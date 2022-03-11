@@ -18,12 +18,15 @@ import UserContext from "./userContext";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(null || localStorage.getItem('token'));
+  console.log("local storage", localStorage.getItem('token'));
+  console.log("token get back", token);
 
   // get back a token after log in
   async function login({ username, password }) {
     const tokenData = await JoblyApi.login({ username, password });
     setToken(tokenData);
+    localStorage.setItem('token', token);
   }
 
   // get back a token after sign up
@@ -36,6 +39,7 @@ function App() {
       email
     });
     setToken(tokenData);
+    localStorage.setItem('token', token);
   }
 
   // get back a user after token state changes
