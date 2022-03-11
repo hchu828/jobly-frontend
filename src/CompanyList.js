@@ -19,7 +19,7 @@ import "./JoblyApp.css"
 function CompanyList() {
   const [companyList, setCompanyList] = useState(null);
   const [filterBy, setFilterBy] = useState("");
-
+  console.debug("rendering companylist", companyList);
 
   // get back a list of companies and update companyList state
   useEffect(function fetchCompanyList() {
