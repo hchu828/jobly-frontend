@@ -1,6 +1,17 @@
 import { useState, useContext } from "react";
 import UserContext from "./userContext";
 
+/** Show the profile form and update the user state 
+ * 
+ * props:
+ *  - editUser: a function passed down from App component
+ * 
+ * state:
+ *  - profileEdited: {username, firstName, lastName, email}
+ * 
+ * Routes -> LoginForm
+ */
+
 function ProfileForm({ editUser }) {
   const user = useContext(UserContext);
   const [profileEdited, setProfileEdited] = useState(false);

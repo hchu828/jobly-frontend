@@ -99,23 +99,27 @@ class JoblyApi {
     return res.jobs;
   }
 
-  /** Get user by (username, password) if authenticated
+  /** Get token by (username, password) if authenticated
    * 
    *  accepts: username(string), password(string)
    * 
-   * returns User object 
-   * where User is { username, firstname, lastname, email, isAdmin, jobs}
-   * where jobs is [{id, title, companyHandle, companyName, state}]
+   * return: token(string)
    */
   static async login({ username, password }) {
     const data = { username, password };
     const res = await this.request("auth/token", data, "post");
     JoblyApi.UserToken = res.token;
     return JoblyApi.UserToken;
-    // const userData = await this.getUser({ token: JoblyApi.UserToken });
-    // return { token: JoblyApi.UserToken, userData };
   }
 
+  /** Get user by a token
+   * 
+   * accepts: token(string)
+   * 
+   * return: user object,
+   * where User is { username, firstname, lastname, email, isAdmin, jobs}
+   * where jobs is [{id, title, companyHandle, companyName, state}]
+   */
   static async getUser(token) {
     const { username } = jwt_decode(token);
     const res = await this.request(`users/${username}`, { token });
@@ -132,17 +136,14 @@ class JoblyApi {
    *  email (string)
    *  }
    * 
-   * returns User object 
-   * where User is { username, firstname, lastname, email, isAdmin, jobs}
-   * where jobs is [{id, title, companyHandle, companyName, state}]
+   * returns: token(string)
+   *
    */
   static async registerUser({ username, password, firstName, lastName, email }) {
     const data = { username, password, firstName, lastName, email };
     const res = await this.request("auth/register", data, "post");
     JoblyApi.UserToken = res.token;
     return JoblyApi.UserToken;
-    // const userData = await this.getUser({ token: JoblyApi.UserToken });
-    // return { token: JoblyApi.UserToken, userData };
   }
 
   /** Edit user details 

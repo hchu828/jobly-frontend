@@ -6,7 +6,8 @@ import "./SearchForm.css";
  * props:
  *  - updateFilterBy: function passed down from the CompanyList
  * 
- * state: none
+ * state: 
+ *  - formData
  * 
  * (CompanyList, JobList) -> SearchForm
  */
@@ -44,17 +45,6 @@ function SearchForm({ updateFilterBy }) {
           <button className="btn btn-primary btn-outline-secondary text-white" type="submit">Submit</button>
         </div>
       </div >
-
-      {/* <input
-        className="input"
-        name="searchForm"
-        placeholder="Enter search term..."
-        value={formData}
-        onChange={handleChange}
-        aria-describedby="basic-addon2"
-      /> */}
-
-      {/* <button className="btn btn-primary">Submit</button> */}
     </form >
   );
 }

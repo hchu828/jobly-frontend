@@ -12,6 +12,7 @@ import UserContext from "./userContext";
  * 
  * State: 
  *  - user: an object, like{username, firstName, lastName, email, isAdmin}
+ *  - token: a string
  * 
  * App -> {Nav, Routes}
  */
@@ -19,14 +20,14 @@ import UserContext from "./userContext";
 function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  // const [isredirect, setIsredirect] = useState(false);
 
+  // get back a token after log in
   async function login({ username, password }) {
     const tokenData = await JoblyApi.login({ username, password });
     setToken(tokenData);
-    // setIsredirect(true);
   }
 
+  // get back a token after sign up
   async function signup({ username, password, firstName, lastName, email }) {
     const tokenData = await JoblyApi.registerUser({
       username,
@@ -36,9 +37,9 @@ function App() {
       email
     });
     setToken(tokenData);
-    // setIsredirect(true);
   }
 
+  // get back a user after token state changes
   useEffect(function fetchUserWithToken() {
     if(token === null) return;
     async function getUser() {
@@ -48,7 +49,7 @@ function App() {
     getUser();
   }, [token]);
 
-
+  // update user information
   async function editUser({ username, firstName, lastName, email }) {
     const userData = await JoblyApi.editUser(
       username,
@@ -59,32 +60,14 @@ function App() {
     setUser(userData);
   }
 
-  // if (isredirect) {
-  // return (
-  //   <div className="App">
-
-  //     <UserContext.Provider value={user}>
-  //       <Nav logout={logout} />
-  //       <Routes
-  //         login={login}
-  //         signup={signup}
-  //         editUser={editUser}
-  //       />
-  //     </UserContext.Provider>
-  //     {/* {isredirect && <redirect push to="/" />} */}
-  //   </div>
-  // );
-  // }
-
+  // logout
   function logout() {
     setUser(null);
-    // setIsredirect(false);
-
+    setToken(null);
   }
 
   return (
     <div className="App">
-
       <UserContext.Provider value={user}>
         <Nav logout={logout} />
         <Routes
@@ -93,7 +76,6 @@ function App() {
           editUser={editUser}
         />
       </UserContext.Provider>
-      {/* {isredirect && <Redirect push to="/" />} */}
     </div>
   );
 }

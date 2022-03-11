@@ -9,9 +9,19 @@ const DEFAULT_FORM_DATA = {
   email: "",
 };
 
+/** Show the sign up form and update the user state 
+ * 
+ * props:
+ *  - signup: a function passed down from App component
+ * 
+ * state:
+ *  - formData: {username, password, firstName, lastName, email}
+ * 
+ * Routes -> LoginForm
+ */
+
 function SignupForm({ signup }) {
   const [formData, setFormData] = useState(DEFAULT_FORM_DATA);
-  const [isRedirect, setIsRedirect] = useState(false);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -26,11 +36,6 @@ function SignupForm({ signup }) {
     evt.preventDefault();
     signup(formData);
     setFormData(DEFAULT_FORM_DATA);
-    setIsRedirect(true);
-  }
-
-  if (isRedirect) {
-    return <Redirect push to="/" />;
   }
 
   return (
