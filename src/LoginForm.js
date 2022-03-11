@@ -9,8 +9,10 @@ import { useState } from "react";
  * 
  * Routes -> LoginForm
  */
+const DEFAULT_FORM_DATA = { username: "", password: "" };
+
 function LoginForm({ login }) {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [formData, setFormData] = useState(DEFAULT_FORM_DATA);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -24,6 +26,7 @@ function LoginForm({ login }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     login(formData);
+    setFormData(DEFAULT_FORM_DATA);
   }
 
   return (

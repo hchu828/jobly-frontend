@@ -1,15 +1,15 @@
 import { useState } from "react";
 
+const DEFAULT_FORM_DATA = {
+  username: "",
+  password: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+};
+
 function SignupForm({ signup }) {
-  const [formData, setFormData] = useState(
-    {
-      username: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-    }
-  );
+  const [formData, setFormData] = useState(DEFAULT_FORM_DATA);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -23,6 +23,7 @@ function SignupForm({ signup }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     signup(formData);
+    setFormData(DEFAULT_FORM_DATA);
   }
 
   return (
