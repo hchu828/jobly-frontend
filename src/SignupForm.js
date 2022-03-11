@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 const DEFAULT_FORM_DATA = {
   username: "",
@@ -10,6 +11,7 @@ const DEFAULT_FORM_DATA = {
 
 function SignupForm({ signup }) {
   const [formData, setFormData] = useState(DEFAULT_FORM_DATA);
+  const [isRedirect, setIsRedirect] = useState(false);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -24,6 +26,11 @@ function SignupForm({ signup }) {
     evt.preventDefault();
     signup(formData);
     setFormData(DEFAULT_FORM_DATA);
+    setIsRedirect(true);
+  }
+
+  if (isRedirect) {
+    return <Redirect push to="/" />;
   }
 
   return (

@@ -19,13 +19,13 @@ import UserContext from "./userContext";
 function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [isRedirect, setIsRedirect] = useState(false);
+  const [isredirect, setIsredirect] = useState(false);
 
   async function login({ username, password }) {
     const res = await JoblyApi.login({ username, password });
     setUser(res.userData);
     setToken(res.token);
-    setIsRedirect(true);
+    // setIsredirect(true);
   }
 
   async function signup({ username, password, firstName, lastName, email }) {
@@ -38,6 +38,7 @@ function App() {
     });
     setUser(res.userData);
     setToken(res.token);
+    // setIsredirect(true);
   }
 
 
@@ -51,26 +52,43 @@ function App() {
     setUser(userData);
   }
 
-  if(isRedirect){
-    return <Redirect push to="/jobs" />;
-  }
+  // if (isredirect) {
+  // return (
+  //   <div className="App">
+
+  //     <UserContext.Provider value={user}>
+  //       <Nav logout={logout} />
+  //       <Routes
+  //         login={login}
+  //         signup={signup}
+  //         editUser={editUser}
+  //       />
+  //     </UserContext.Provider>
+  //     {/* {isredirect && <redirect push to="/" />} */}
+  //   </div>
+
+  // );
+
+  // }
 
   function logout() {
     setUser(null);
+    setIsredirect(false);
+
   }
 
   return (
     <div className="App">
-     
-        <UserContext.Provider value={user}>
-          <Nav logout={logout} />
-          <Routes
-            login={login}
-            signup={signup}
-            editUser={editUser}
-          />
-        </UserContext.Provider>
-  
+
+      <UserContext.Provider value={user}>
+        <Nav logout={logout} />
+        <Routes
+          login={login}
+          signup={signup}
+          editUser={editUser}
+        />
+      </UserContext.Provider>
+      {isredirect && <Redirect push to="/" />}
     </div>
   );
 }
