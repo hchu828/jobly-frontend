@@ -16,20 +16,20 @@ import ProfileForm from "./ProfileForm";
  * App -> Routes
  */
 
-function Routes() {
+function Routes({ login, signup, editUser }) {
   return (
     <Switch>
       <Route exact path="/">
         <Homepage />
       </Route>
       <Route exact path="/login">
-        <LoginForm />
+        <LoginForm login={login} />
       </Route>
       <Route exact path="/signup">
-        <SignupForm />
+        <SignupForm signup={signup} />
       </Route>
       <Route exact path="/profile">
-        <ProfileForm />
+        <ProfileForm editUser={editUser} />
       </Route>
       <Route exact path="/companies">
         <CompanyList />

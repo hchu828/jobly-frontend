@@ -15,7 +15,7 @@ import UserContext from "./userContext";
 
 function Nav({ logout }) {
   const user = useContext(UserContext);
-  
+
   return (
     <div>
       {user === null ?

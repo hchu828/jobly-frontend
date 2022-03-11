@@ -106,29 +106,41 @@ class JoblyApi {
    * where User is { username, firstname, lastname, email, isAdmin, jobs}
    * where jobs is [{id, title, companyHandle, companyName, state}]
    */
-  static async getUser(username, password) {
-    const res = await this.request("users", { username, password });
+  static async login({ username, password }) {
+    const data = { username, password };
+    const res = await this.request("auth/token", data, "post");
     JoblyApi.UserToken = res.token;
+    const token = res.token;
+    const userRes = await this.getUser({ username, token });
+    console.log("iuserRes", userRes);
+    return userRes;
+  }
+
+  static async getUser({ username, token }) {
+    const res = await this.request(`users/${username}`, { token });
+    console.log("resssssss", res);
     return res.user;
   }
 
   /** Register new user
    * 
-   * accepts: 
+   * accepts: object like {
    *  username (string),
    *  password (string),
    *  firstName (string),
    *  lastName (string),
    *  email (string)
+   *  }
    * 
    * returns User object 
    * where User is { username, firstname, lastname, email, isAdmin, jobs}
    * where jobs is [{id, title, companyHandle, companyName, state}]
    */
-  static async registerUser(username, password, firstName, lastName, email) {
+  static async registerUser({ username, password, firstName, lastName, email }) {
     const data = { username, password, firstName, lastName, email };
-    const res = await this.request("users", data, "post");
+    const res = await this.request("auth/register", data, "post");
     JoblyApi.UserToken = res.token;
+
     return res.user;
   }
 

@@ -19,23 +19,23 @@ import UserContext from "./userContext";
 function App() {
   const [user, setUser] = useState(null);
 
-  async function login({username, password}) {
-    const userData = await JoblyApi.getUser(username, password);
+  async function login({ username, password }) {
+    const userData = await JoblyApi.login({ username, password });
     setUser(userData);
   }
 
-  async function signup({username, password, firstName, lastName, email}) {
-    const userData = await JoblyApi.registerUser(
+  async function signup({ username, password, firstName, lastName, email }) {
+    const userData = await JoblyApi.registerUser({
       username,
       password,
       firstName,
       lastName,
       email
-    );
+    });
     setUser(userData);
   }
 
-  async function editUser({username, firstName, lastName, email}) {
+  async function editUser({ username, firstName, lastName, email }) {
     const userData = await JoblyApi.editUser(
       username,
       firstName,
@@ -57,7 +57,7 @@ function App() {
           <Routes
             login={login}
             signup={signup}
-            edit={editUser}
+            editUser={editUser}
           />
         </UserContext.Provider>
 

@@ -10,47 +10,49 @@ import { useState } from "react";
  * Routes -> LoginForm
  */
 function LoginForm({ login }) {
-    const [formData, setFormData] = useState({ username: "", password: "" });
+  const [formData, setFormData] = useState({ username: "", password: "" });
 
-    function handleChange(evt) {
-        const { name, value } = evt.target.value;
-        setFormData(fData => ({
-            ...fData,
-            [name]: value,
-        }));
-    }
+  function handleChange(evt) {
+    const { name, value } = evt.target;
 
-    function handleSubmit(evt) {
-        evt.preventDefault();
-        login(formData);
-    }
+    setFormData(fData => ({
+      ...fData,
+      [name]: value,
+    }));
+  }
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="username">
-                Username
-            </label>
-            <input
-                id="username"
-                name="username"
-                value={formData.username}
-                required
-                onChange={handleChange}
-            />
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    login(formData);
+  }
 
-            <label htmlFor="password">
-                Password
-            </label>
-            <input
-                id="password"
-                name="password"
-                value={formData.password}
-                required
-                onChange={handleChange}
-            />
-            <button>Submit</button>
-        </form>
-    );
+  return (
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="username">
+        Username
+      </label>
+      <input
+        id="username"
+        name="username"
+        value={formData.username}
+        required
+        onChange={handleChange}
+      />
+
+      <label htmlFor="password">
+        Password
+      </label>
+      <input
+        id="password"
+        name="password"
+        value={formData.password}
+        required
+        onChange={handleChange}
+        type="password"
+      />
+      <button>Submit</button>
+    </form>
+  );
 }
 
 export default LoginForm;
