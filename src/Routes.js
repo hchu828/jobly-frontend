@@ -10,8 +10,11 @@ import UserContext from "./userContext";
 import { useContext } from "react";
 
 /** Routes for rendering components
- * 
- * Props: none
+ * //TODO: useContext
+ * Props: 
+ * -login: function called from App parent
+ * - signup: function called from App parent
+ * - editUser: function called from App parent
  * 
  * State: none
  * 
@@ -22,7 +25,7 @@ function Routes({ login, signup, editUser }) {
   const user = useContext(UserContext);
 
   return (
-    <main>
+    <>
       {!user
         ?
         <Switch>
@@ -57,7 +60,7 @@ function Routes({ login, signup, editUser }) {
           <Redirect to="/" />
         </Switch>
       }
-    </main>
+    </>
   );
 }
 

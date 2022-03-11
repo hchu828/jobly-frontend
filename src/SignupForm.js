@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
 
 const DEFAULT_FORM_DATA = {
   username: "",
@@ -91,6 +90,7 @@ function SignupForm({ signup }) {
       <input
         id="email"
         name="email"
+        type="email"
         value={formData.email}
         required
         onChange={handleChange}

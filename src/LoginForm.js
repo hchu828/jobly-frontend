@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
+
 /** Show the login form and update the user state 
  * 
  * props:
@@ -25,6 +25,7 @@ function LoginForm({ login }) {
   }
 
   function handleSubmit(evt) {
+    //TODO: try/catch + await on login
     evt.preventDefault();
     login(formData);
     setFormData(DEFAULT_FORM_DATA);

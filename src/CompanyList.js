@@ -11,7 +11,7 @@ import "./JoblyApp.css"
  * state:
  *  - companyList: an array of company object, like 
  *      [{handle, name, description, numEmployees, logoUrl}...]
- *  filterBy: a string that user input for searching, like "hall"
+ *  - filterBy: a string that user input for searching, like "hall"
  * 
  * Routes -> CompanyList -> (SearchForm, CompanyCard)
  */

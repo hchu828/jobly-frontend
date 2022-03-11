@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 function HomePage() {
   const user = useContext(UserContext);
   return (
-    <main>
+    <>
       {
         user
           ?
@@ -36,7 +36,7 @@ function HomePage() {
             </div>
           </div >
       }
-    </main>
+    </>
   );
 }
 

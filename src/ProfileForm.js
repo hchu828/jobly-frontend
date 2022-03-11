@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import UserContext from "./userContext";
 
 /** Show the profile form and update the user state 
- * 
+ *  //TODO: useCOntext docstring
  * props:
  *  - editUser: a function passed down from App component
  * 
@@ -39,9 +39,9 @@ function ProfileForm({ editUser }) {
     editUser(formData);
     setProfileEdited(true);
   }
-
+  //TODO: consider checking if form data actually changed
   return (
-    <main>
+    <>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">
           Username
@@ -91,7 +91,7 @@ function ProfileForm({ editUser }) {
       {profileEdited &&
         <p>Profile successfully changed!</p>
       }
-    </main>
+    </>
   );
 
 }

@@ -29,7 +29,6 @@ function SearchForm({ updateFilterBy }) {
 
   return (
     <form onSubmit={handleSubmit}>
-
       <div className="input-group">
         <div className="col-md-6">
           <input

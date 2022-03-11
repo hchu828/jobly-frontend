@@ -1,6 +1,5 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { Redirect } from "react-router-dom";
 import JoblyApi from "./JoblyApi";
 import Nav from "./Nav";
 import Routes from "./Routes";
@@ -41,7 +40,7 @@ function App() {
 
   // get back a user after token state changes
   useEffect(function fetchUserWithToken() {
-    if(token === null) return;
+    if (token === null) return;
     async function getUser() {
       const userData = await JoblyApi.getUser(token);
       setUser(userData);

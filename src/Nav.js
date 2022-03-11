@@ -8,17 +8,21 @@ import UserContext from "./userContext";
  * Props: 
  *  -logout: a function passed down from App component
  * 
+ * Context: 
+ * - user: {}
+ * 
  * State: none
  * 
  * App -> Nav 
  */
-
+//TODO: docstring for whenever you're using useContext
 function Nav({ logout }) {
   const user = useContext(UserContext);
 
   return (
-    <div>
-      {user === null ?
+    <>
+      {user === null
+        ?
         <nav className="Nav">
           <div className="Nav-left">
             <NavLink exact to="/">Jobly</NavLink>
@@ -37,11 +41,11 @@ function Nav({ logout }) {
             <NavLink to="/companies">Companies</NavLink>
             <NavLink to="/jobs">Jobs</NavLink>
             <NavLink to="/profile">Profile</NavLink>
-            <button onClick={logout}>Logout {user.username}</button>
+            <button className="btn btn-primary" onClick={logout}>Logout {user.username}</button>
           </div>
         </nav>
       }
-    </div>
+    </>
   );
 }
 
