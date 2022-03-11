@@ -111,11 +111,12 @@ class JoblyApi {
     const data = { username, password };
     const res = await this.request("auth/token", data, "post");
     JoblyApi.UserToken = res.token;
-    const userData = await this.getUser({ token: JoblyApi.UserToken });
-    return { token: JoblyApi.UserToken, userData };
+    return JoblyApi.UserToken;
+    // const userData = await this.getUser({ token: JoblyApi.UserToken });
+    // return { token: JoblyApi.UserToken, userData };
   }
 
-  static async getUser({ token }) {
+  static async getUser(token) {
     const { username } = jwt_decode(token);
     const res = await this.request(`users/${username}`, { token });
     return res.user;
@@ -139,8 +140,9 @@ class JoblyApi {
     const data = { username, password, firstName, lastName, email };
     const res = await this.request("auth/register", data, "post");
     JoblyApi.UserToken = res.token;
-    const userData = await this.getUser({ token: JoblyApi.UserToken });
-    return { token: JoblyApi.UserToken, userData };
+    return JoblyApi.UserToken;
+    // const userData = await this.getUser({ token: JoblyApi.UserToken });
+    // return { token: JoblyApi.UserToken, userData };
   }
 
   /** Edit user details 

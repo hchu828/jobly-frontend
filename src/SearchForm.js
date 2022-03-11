@@ -41,7 +41,7 @@ function SearchForm({ updateFilterBy }) {
           />
         </div>
         <div className="input-group-append">
-          <button class="btn btn-primary btn-outline-secondary text-white" type="submit">Submit</button>
+          <button className="btn btn-primary btn-outline-secondary text-white" type="submit">Submit</button>
         </div>
       </div >
 

@@ -6,6 +6,8 @@ import JobList from "./JobList";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import ProfileForm from "./ProfileForm";
+import UserContext from "./userContext";
+import { useContext } from "react";
 
 /** Routes for rendering components
  * 
@@ -17,31 +19,45 @@ import ProfileForm from "./ProfileForm";
  */
 
 function Routes({ login, signup, editUser }) {
+  const user = useContext(UserContext);
+
   return (
-    <Switch>
-      <Route exact path="/">
-        <Homepage />
-      </Route>
-      <Route exact path="/login">
-        <LoginForm login={login} />
-      </Route>
-      <Route exact path="/signup">
-        <SignupForm signup={signup} />
-      </Route>
-      <Route exact path="/profile">
-        <ProfileForm editUser={editUser} />
-      </Route>
-      <Route exact path="/companies">
-        <CompanyList />
-      </Route>
-      <Route exact path="/companies/:handle">
-        <CompanyDetail />
-      </Route>
-      <Route exact path="/jobs">
-        <JobList />
-      </Route>
-      <Redirect to="/" />
-    </Switch>
+    <main>
+      {!user
+        ?
+        <Switch>
+          <Route exact path="/">
+            <Homepage />
+          </Route>
+          <Route exact path="/login">
+            <LoginForm login={login} />
+          </Route>
+          <Route exact path="/signup">
+            <SignupForm signup={signup} />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+        :
+        <Switch>
+          <Route exact path="/">
+            <Homepage />
+          </Route>
+          <Route exact path="/profile">
+            <ProfileForm editUser={editUser} />
+          </Route>
+          <Route exact path="/companies">
+            <CompanyList />
+          </Route>
+          <Route exact path="/companies/:handle">
+            <CompanyDetail />
+          </Route>
+          <Route exact path="/jobs">
+            <JobList />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+      }
+    </main>
   );
 }
 

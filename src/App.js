@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Redirect } from "react-router-dom";
 import JoblyApi from "./JoblyApi";
 import Nav from "./Nav";
@@ -19,27 +19,34 @@ import UserContext from "./userContext";
 function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [isredirect, setIsredirect] = useState(false);
+  // const [isredirect, setIsredirect] = useState(false);
 
   async function login({ username, password }) {
-    const res = await JoblyApi.login({ username, password });
-    setUser(res.userData);
-    setToken(res.token);
+    const tokenData = await JoblyApi.login({ username, password });
+    setToken(tokenData);
     // setIsredirect(true);
   }
 
   async function signup({ username, password, firstName, lastName, email }) {
-    const res = await JoblyApi.registerUser({
+    const tokenData = await JoblyApi.registerUser({
       username,
       password,
       firstName,
       lastName,
       email
     });
-    setUser(res.userData);
-    setToken(res.token);
+    setToken(tokenData);
     // setIsredirect(true);
   }
+
+  useEffect(function fetchUserWithToken() {
+    if(token === null) return;
+    async function getUser() {
+      const userData = await JoblyApi.getUser(token);
+      setUser(userData);
+    }
+    getUser();
+  }, [token]);
 
 
   async function editUser({ username, firstName, lastName, email }) {
@@ -66,14 +73,12 @@ function App() {
   //     </UserContext.Provider>
   //     {/* {isredirect && <redirect push to="/" />} */}
   //   </div>
-
   // );
-
   // }
 
   function logout() {
     setUser(null);
-    setIsredirect(false);
+    // setIsredirect(false);
 
   }
 
@@ -88,7 +93,7 @@ function App() {
           editUser={editUser}
         />
       </UserContext.Provider>
-      {isredirect && <Redirect push to="/" />}
+      {/* {isredirect && <Redirect push to="/" />} */}
     </div>
   );
 }
