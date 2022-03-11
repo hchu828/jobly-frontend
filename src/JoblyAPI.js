@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
@@ -25,7 +26,7 @@ class JoblyApi {
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+    const headers = { Authorization: `Bearer ${JoblyApi.UserToken}` };
     const params = (method === "get")
       ? data
       : {};
@@ -109,16 +110,14 @@ class JoblyApi {
   static async login({ username, password }) {
     const data = { username, password };
     const res = await this.request("auth/token", data, "post");
-    JoblyApi.UserToken = res.token;
-    const token = res.token;
-    const userRes = await this.getUser({ username, token });
-    console.log("iuserRes", userRes);
+    JoblyApi.UserToken = res.token;  
+    const userRes = await this.getUser({ token: JoblyApi.UserToken});
     return userRes;
   }
 
-  static async getUser({ username, token }) {
+  static async getUser({ token }) {
+    const {username} = jwt_decode(token);
     const res = await this.request(`users/${username}`, { token });
-    console.log("resssssss", res);
     return res.user;
   }
 
@@ -140,8 +139,8 @@ class JoblyApi {
     const data = { username, password, firstName, lastName, email };
     const res = await this.request("auth/register", data, "post");
     JoblyApi.UserToken = res.token;
-
-    return res.user;
+    console.log(res);
+    return res.token;
   }
 
   /** Edit user details 
