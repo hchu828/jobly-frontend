@@ -22,11 +22,13 @@ import { useContext } from "react";
  */
 
 function Routes({ login, signup, editUser }) {
-  const user = useContext(UserContext);
+  const {token} = useContext(UserContext);
+
+  console.log("token from routes", token);
 
   return (
     <>
-      {!user
+      {!token
         ?
         <Switch>
           <Route exact path="/">

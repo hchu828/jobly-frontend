@@ -13,11 +13,11 @@ import { Link } from "react-router-dom";
  */
 
 function HomePage() {
-  const user = useContext(UserContext);
+  const {user, token} = useContext(UserContext);
   return (
     <>
       {
-        user
+        token
           ?
           <div className="JoblyApp">
             < div className="Homepage " >

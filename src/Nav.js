@@ -17,11 +17,12 @@ import UserContext from "./userContext";
  */
 //TODO: docstring for whenever you're using useContext
 function Nav({ logout }) {
-  const user = useContext(UserContext);
+  const {user, token} = useContext(UserContext);
+  console.log("user from nav", user);
 
   return (
     <>
-      {user === null
+      { !token
         ?
         <nav className="Nav">
           <div className="Nav-left">

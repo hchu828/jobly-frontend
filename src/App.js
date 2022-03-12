@@ -18,15 +18,13 @@ import UserContext from "./userContext";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null || localStorage.getItem('token'));
-  console.log("local storage", localStorage.getItem('token'));
-  console.log("token get back", token);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   // get back a token after log in
   async function login({ username, password }) {
     const tokenData = await JoblyApi.login({ username, password });
     setToken(tokenData);
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', tokenData);
   }
 
   // get back a token after sign up
@@ -39,18 +37,18 @@ function App() {
       email
     });
     setToken(tokenData);
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', tokenData);
   }
 
   // get back a user after token state changes
   useEffect(function fetchUserWithToken() {
-    if (token === null) return;
+    if (token === null) return;  
     async function getUser() {
       const userData = await JoblyApi.getUser(token);
       setUser(userData);
     }
     getUser();
-  }, [token]);
+  }, [token, user]);
 
   // update user information
   async function editUser({ username, firstName, lastName, email }) {
@@ -63,15 +61,20 @@ function App() {
     setUser(userData);
   }
 
+  if((!user) && token) {
+    return <i> Loading...</i>;
+  }
+
   // logout
   function logout() {
     setUser(null);
     setToken(null);
+    localStorage.removeItem('token');
   }
 
   return (
     <div className="App">
-      <UserContext.Provider value={user}>
+      <UserContext.Provider value={{user, token}}>
         <Nav logout={logout} />
         <Routes
           login={login}
