@@ -44,11 +44,13 @@ function App() {
   useEffect(function fetchUserWithToken() {
     if (token === null) return;  
     async function getUser() {
+      console.log("token from get user", token);
       const userData = await JoblyApi.getUser(token);
+      console.log("user from get user", userData);
       setUser(userData);
     }
     getUser();
-  }, [token, user]);
+  }, [token]);
 
   // update user information
   async function editUser({ username, firstName, lastName, email }) {

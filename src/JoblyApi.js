@@ -121,8 +121,9 @@ class JoblyApi {
    * where jobs is [{id, title, companyHandle, companyName, state}]
    */
   static async getUser(token) {
+    JoblyApi.UserToken = token;
     const { username } = jwt_decode(token);
-    const res = await this.request(`users/${username}`, { token });
+    const res = await this.request(`users/${username}`);
     return res.user;
   }
 
