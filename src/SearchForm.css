@@ -11,6 +11,7 @@ input {
 }
 
 .input-group{
-    width: 60%;
+    justify-content: center;
+    width: 70%;
 }
 
