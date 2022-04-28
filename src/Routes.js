@@ -1,4 +1,5 @@
 import { Switch, Route, Redirect } from "react-router-dom";
+import "./Routes.css";
 import Homepage from "./Homepage";
 import CompanyList from "./CompanyList";
 import CompanyDetail from "./CompanyDetail";
@@ -22,13 +23,13 @@ import { useContext } from "react";
  */
 
 function Routes({ login, signup, editUser }) {
-  const {token} = useContext(UserContext);
+  const { user, token } = useContext(UserContext);
 
   console.log("token from routes", token);
 
   return (
     <>
-      {!token
+      {!user
         ?
         <Switch>
           <Route exact path="/">

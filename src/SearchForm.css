@@ -1,4 +1,16 @@
-.input-group{
-  justify-content: center;
-  padding-top: 1em;
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10em;
 }
+
+input {
+    width: 10em;
+}
+
+.input-group{
+    width: 60%;
+}
+
